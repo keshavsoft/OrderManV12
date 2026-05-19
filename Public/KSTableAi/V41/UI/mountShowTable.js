@@ -5,7 +5,7 @@ import createForm from "../BuildSearchForm/V1/createForm.js";
 import buildDataLists from "../BuildDataLists/V1/addToDom.js";
 
 import buildFooter from "../BuildTableVersions/V4/BuildFooterVersions/ForSummary/V8/CreateFooterRow/V3/start.js";
-import SearchFuncs from "../TableFirstRow/V2/SearchFuncs/index.js";
+import SearchFuncs from "../TableFirstRow/V3/SearchFuncs/V4/index.js";
 
 import { buildFullUI } from "./compose/buildFullUI.js";
 

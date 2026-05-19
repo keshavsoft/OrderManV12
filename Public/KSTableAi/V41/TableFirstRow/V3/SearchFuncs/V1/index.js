@@ -9,7 +9,7 @@ const startFunc = ({
     const rows =
         inContainerEl.querySelectorAll("tbody tr");
 
-    // cache once
+    // cache row text once
     rows.forEach((row) => {
 
         row.dataset.searchText =
@@ -26,7 +26,7 @@ const startFunc = ({
         const searchValue =
             event.target.value.toLowerCase();
 
-        // fast filtering
+        // fast filter
         rows.forEach((row) => {
 
             const matched =
@@ -42,29 +42,41 @@ const startFunc = ({
         // delayed highlight
         timeout = setTimeout(() => {
 
+            // clear old highlights
             rows.forEach((row) => {
 
                 row.querySelectorAll("mark").forEach((mark) => {
+
                     mark.replaceWith(mark.innerText);
+
                 });
 
-                if (
-                    row.style.display === "none"
-                    || !searchValue
-                ) {
+            });
+
+            if (!searchValue) {
+                return;
+            };
+
+            const escapedSearchValue =
+                searchValue.replace(
+                    /[.*+?^${}()|[\]\\]/g,
+                    "\\$&"
+                );
+
+            const regex =
+                new RegExp(
+                    `(${escapedSearchValue})`,
+                    "ig"
+                );
+
+            // highlight only visible rows
+            rows.forEach((row) => {
+
+                if (row.style.display === "none") {
                     return;
                 };
 
                 row.querySelectorAll("td").forEach((cell) => {
-
-                    const escapedSearchValue =
-                        searchValue.replace(
-                            /[.*+?^${}()|[\]\\]/g,
-                            "\\$&"
-                        );
-
-                    const regex =
-                        new RegExp(`(${escapedSearchValue})`, "ig");
 
                     cell.innerHTML =
                         cell.textContent.replace(
@@ -75,6 +87,15 @@ const startFunc = ({
                 });
 
             });
+
+            // // optional footer update
+            // if (inUpdateFooter) {
+
+            //     inUpdateFooter({
+            //         inContainerEl
+            //     });
+
+            // };
 
         }, 400);
 

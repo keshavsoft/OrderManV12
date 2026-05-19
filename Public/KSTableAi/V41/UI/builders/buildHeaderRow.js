@@ -23,6 +23,7 @@ const createLeftSection = ({ inTitleText }) => {
 
     const title = document.createElement("h5");
     title.className = "tableNameClass text-lg font-semibold text-gray-900";
+    title.dataset.tableName = titleText;
     title.textContent = titleText;
 
     left.appendChild(title);
