@@ -1,4 +1,4 @@
-import { initShowTable } from "../../../../../../../../KSTableAi/V41/entry.js";
+import { initShowTable } from "../../../../../../../../KSTableAi/V42/entry.js";
 
 const clickFuncToRun = () => {
     buildUi().then();
