@@ -1,4 +1,4 @@
-import { initTableOnly } from "../../../../../../../../KSTableAi/V26/entry.js";
+// import { initTableOnly } from "../../../../../../../../KSTableAi/V26/entry.js";
 
 const clickFuncToRun = () => {
     buildUi().then();
@@ -20,8 +20,9 @@ const buildUi = async () => {
             find: "/Api/V9/BillsTable/find"
         },
         options: {
+            showFilterVerticalForm: true,
             firstRow: {
-                showSearch: true
+                showSearch: false
             },
             vertical: {
                 showVertical: true,
@@ -50,13 +51,15 @@ const buildUi = async () => {
                 columnName: "StockItemName"
             },
             {
-                columnName: "StockItemReservedName"
+                columnName: "StockItemReservedName",
+                isVisible: false
             },
             {
                 columnName: "StockItemType"
             },
             {
-                columnName: "StockBaseUnits"
+                columnName: "StockBaseUnits",
+                "isSearchable": true
             },
             {
                 columnName: "sgstRate"
@@ -89,8 +92,22 @@ const buildUi = async () => {
         }
     };
 
-    await initTableOnly(config);
+    // await initTableOnly(config);
+    await callKSTable(config);
     // window.KSTable.initTableOnly(config);
+};
+
+const callKSTable = async (config) => {
+    if (window.KSTable?.initShowTable) {
+        console.log("table loaded from window.KSTable");
+
+        return window.KSTable.initShowTable(config); // extension or CDN
+    } else {
+        // const { initShowTable } = await import("https://keshavsoft.github.io/KsJsTableAi/Public/kstable.js"); // local
+        const { initShowTable } = await import("../../../../../../../../KSTableAi/V41/entry.js");
+
+        return initShowTable(config);
+    };
 };
 
 export { clickFuncToRun };

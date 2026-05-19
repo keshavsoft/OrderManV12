@@ -84,10 +84,10 @@ const buildUi = async () => {
         }
     };
 
-    await initShowTable(config);
+    // await initShowTable(config);
 
     // window.KSTable.initTableOnly(config);
-    // await callKSTable(config);
+    await callKSTable(config);
 };
 
 const callKSTable = async (config) => {
