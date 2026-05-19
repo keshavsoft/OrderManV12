@@ -1,4 +1,4 @@
-// import { initTableOnly } from "../../../../../../../../../KSTableAi/V25/entry.js";
+import { initShowTable } from "../../../../../../../../KSTableAi/V41/entry.js";
 
 const clickFuncToRun = () => {
     buildUi().then();
@@ -84,22 +84,22 @@ const buildUi = async () => {
         }
     };
 
-    // await initTableOnly(config);
+    await initShowTable(config);
 
     // window.KSTable.initTableOnly(config);
-    await callKSTable(config);
+    // await callKSTable(config);
 };
 
 const callKSTable = async (config) => {
-    if (window.KSTable?.initTableOnly) {
+    if (window.KSTable?.initShowTable) {
         console.log("table loaded from window.KSTable");
 
-        return window.KSTable.initTableOnly(config); // extension or CDN
+        return window.KSTable.initShowTable(config); // extension or CDN
     } else {
-        // const { initTableOnly } = await import("../../../../../../../../KSTableAi/V28/entry.js"); // local
-        const { initTableOnly } = await import("https://keshavsoft.github.io/KsJsTableAi/Public/kstable.js"); // local
+        // const { initShowTable } = await import("https://keshavsoft.github.io/KsJsTableAi/Public/kstable.js"); // local
+        const { initShowTable } = await import("../../../../../../../../KSTableAi/V41/entry.js");
 
-        return initTableOnly(config);
+        return initShowTable(config);
     };
 };
 

@@ -1,4 +1,4 @@
-import { initHeader } from "../../../../../../header/v1/initHeader.js";
+import { initHeader } from "../../../../../../header/v5/initHeader.js";
 
 const buildHeader = () => {
     const headerConfig = {
@@ -51,5 +51,17 @@ const buildHeader = () => {
     initHeader(headerConfig);
 };
 
+const callKSHeader = async (config) => {
+    if (window.KSHeader?.initHeader) {
+        console.log("table loaded from window.KSTable");
+
+        return window.KSHeader.initHeader(config); // extension or CDN
+    } else {
+        // const { initTableOnly } = await import("../../../../../../../../KSTableAi/V28/entry.js"); // local
+        const { initTableOnly } = await import("https://keshavsoft.github.io/KsJsTableAi/Public/kstable.js"); // local
+
+        return initTableOnly(config);
+    };
+};
 
 export { buildHeader };
